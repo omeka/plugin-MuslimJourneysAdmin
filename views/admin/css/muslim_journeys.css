@@ -1,2 +1,14 @@
 input.mj-input { clear: both; margin-top: 12px;}
-dt#muslim_journeys_relations-label {clear: both; margin-bottom: 24px; }
+
+dt#muslim_journeys_relations-label {margin-bottom: 24px; }
+
+div#mj-books {
+padding: 6px;
+width: 45%;
+float: right;
+}
+
+div#mj-essays {
+padding: 6px;
+width: 45%;
+}

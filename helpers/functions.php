@@ -50,6 +50,9 @@ function mj_get_related_items($itemType, $item = null)
     if(!$item) {
         $item = get_current_item();
     }
+    if(! $item->exists()) {
+        return array();
+    }
     $itemId = $item->id;
     $relatedPropId = record_relations_property_id(DCTERMS, 'relation');
     $params = array(

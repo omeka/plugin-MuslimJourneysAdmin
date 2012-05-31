@@ -63,9 +63,13 @@ class MuslimJourneysPlugin extends Omeka_Plugin_Abstract
 
 
         $form = "";
+        $form .= "<div id='mj-books'>";
         $form .= $booksCheckboxes;
+        $form .= "</div>";
+        $form .= "<div id='mj-essays'>";
         $form .= $essaysCheckboxes;
-        return $form;
+        $form .= "</div>";
+        return htmlspecialchars_decode( $form );
     }
 
     private function itemsToCheckboxes($items, $itemType)
