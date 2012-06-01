@@ -33,7 +33,7 @@ class MuslimJourneysPlugin extends Omeka_Plugin_Abstract
     {
         $type = get_db()->getTable('ItemType')->find($item->item_type_id);
         if(!($type->name == 'Book' || $type->name == 'Essay')) {
-            $tabs['Item Relations'] = $this->getItemRelationsForm($item);
+            $tabs['Essays and Books'] = $this->getItemRelationsForm($item);
         }
         return $tabs;
     }
