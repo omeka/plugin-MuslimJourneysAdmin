@@ -45,7 +45,7 @@ function mj_get_related_items_for_loop()
     return $view->related_items;
 }
 
-function mj_get_related_items($itemType, $item = null)
+function mj_get_related_items($itemType = null, $item = null)
 {
     if(!$item) {
         $item = get_current_item();
@@ -62,7 +62,12 @@ function mj_get_related_items($itemType, $item = null)
         'object_record_type'=>'Item'
     );
 
-    $items = get_db()->getTable('RecordRelationsRelation')->findObjectRecordsByParams($params, array(), array('type'=>$itemType));
+    if($itemType) {
+        $items = get_db()->getTable('RecordRelationsRelation')->findObjectRecordsByParams($params, array(), array('type'=>$itemType));
+    } else {
+        $items = get_db()->getTable('RecordRelationsRelation')->findObjectRecordsByParams($params);
+    }
+    
     return $items;
 }
 
