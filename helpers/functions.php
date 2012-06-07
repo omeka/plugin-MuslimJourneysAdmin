@@ -71,3 +71,27 @@ function mj_get_related_items($itemType = null, $item = null)
     return $items;
 }
 
+function mj_get_related_to_book_or_essay($itemType = null, $item = null)
+{
+    if(!$item) {
+        $item = get_current_item();
+    }
+    if(! $item->exists()) {
+        return array();
+    }
+    $itemId = $item->id;
+    $relatedPropId = record_relations_property_id(DCTERMS, 'relation');
+    $params = array(
+            'object_id'=>$itemId,
+            'subject_record_type'=>'Item',
+            'property_id'=>$relatedPropId,
+            'object_record_type'=>'Item'
+    );
+    
+    if($itemType) {
+        $items = get_db()->getTable('RecordRelationsRelation')->findSubjectRecordsByParams($params, array(), array('type'=>$itemType));
+    } else {
+        $items = get_db()->getTable('RecordRelationsRelation')->findSubjectRecordsByParams($params);
+    }    
+    return $items;    
+}

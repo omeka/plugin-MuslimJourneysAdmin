@@ -32,7 +32,15 @@ class MuslimJourneysPlugin extends Omeka_Plugin_Abstract
     public function filterAdminItemsFormTabs($tabs, $item)
     {
         $type = get_db()->getTable('ItemType')->find($item->item_type_id);
-        if(!($type->name == 'Book' || $type->name == 'Essay')) {
+        if(($type->name == 'Book') || ($type->name == 'Essay')) {
+            $items = mj_get_related_to_book_or_essay();
+            $html = "<ul>";
+            foreach($items as $item) {
+                $html .= "<li>" . item('Dublin Core', 'Title', array(), $item);
+            }            
+            $html .= "</ul>";
+            $tabs['Related Items'] = $html;
+        } else {
             $tabs['Essays and Books'] = $this->getItemRelationsForm($item);
         }
         return $tabs;
